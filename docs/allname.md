@@ -1,1 +1,0 @@
-- ![标准名称](./images/name.jpg)

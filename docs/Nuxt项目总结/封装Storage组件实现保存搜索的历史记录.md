@@ -1,14 +1,17 @@
-## Vue模块化，封装Storage组件实现保存搜索的历史记录
+# 封装 Storage 组件实现保存搜索的历史记录
 
-### 1.使用Storage缓存页面数据
+## Vue 模块化，封装 Storage 组件实现保存搜索的历史记录
+
+### 1.使用 Storage 缓存页面数据
 
 刷新页面后，之前操作的重要数据可以缓存到内存中，下次可以直接显示或者是使用
 
 将数据进行缓存：`localStorage.setItem("list",JSON.stringify(this.list));`
 
- 将缓存数据取出：`var list=JSON.parse(localStorage.getItem("list"));`
+将缓存数据取出：`var list=JSON.parse(localStorage.getItem("list"));`
 
 生命周期函数：
+
 ```
 mounted(){ /*生命周期函数， vue页面刷新就会触发的方法*/
     var list=JSON.parse(localStorage.getItem("list"));
@@ -16,10 +19,11 @@ mounted(){ /*生命周期函数， vue页面刷新就会触发的方法*/
       this.list = list;
     }
 ```
+
 ```
 <template>
   <div id="app">
- 
+
     <br>
     <input type="text" v-model='todo' @keydown="doAdd($event)">
     <br>
@@ -39,7 +43,7 @@ mounted(){ /*生命周期函数， vue页面刷新就会触发的方法*/
     </ul>
   </div>
 </template>
- 
+
 <script>
 export default {
   name: 'app',
@@ -73,20 +77,21 @@ export default {
   }
 }
 </script>
- 
+
 <style lang="scss">
 </style>
 ```
 
 ![1](./images/storage1.png)
 
-### 2.封装Storage组件和使用
+### 2.封装 Storage 组件和使用
 
 序列化对象：`JSON.stringify()`;
 
 对象反序列化：`JSON.parse()`;
 
 - 创建组件 `...\vuedemo02\src\model\storage.js`
+
 ```
 /* 封装操作localstorage本地存储的方法，模块化的文件 */
 var storage ={
@@ -103,7 +108,9 @@ var storage ={
 
 export default storage;
 ```
-- 在vue中调用 
+
+- 在 vue 中调用
+
 ```
 import storage from "./model/storage.js";
 
@@ -111,7 +118,7 @@ storage.set("list",this.list);
 
 <template>
   <div id="app">
- 
+
     <br>
     <input type="text" v-model='todo' @keydown="doAdd($event)">
     <br>
@@ -131,7 +138,7 @@ storage.set("list",this.list);
     </ul>
   </div>
 </template>
- 
+
 <script>
   import storage from "./model/storage.js";
 export default {
@@ -166,7 +173,7 @@ export default {
   }
 }
 </script>
- 
+
 <style lang="scss">
 </style>
 ```

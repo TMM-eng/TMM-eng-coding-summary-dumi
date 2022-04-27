@@ -1,108 +1,83 @@
-## react之引用echarts
+# react 之引用 echarts
 
 下载：
+
 ```
 npm install echarts --save
 // 或
 yarn add echarts
 ```
-**demo1代码：**
+
+**demo1 代码：**
+
 ```js
 import React, { Component } from 'react';
 
 // 引入 ECharts 主模块
 import echarts from 'echarts/lib/echarts';
 // 引入柱状图
-import  'echarts/lib/chart/bar';
+import 'echarts/lib/chart/bar';
 // 引入提示框和标题组件
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 
 class EchartsTest extends Component {
-    componentDidMount() {
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-        // 绘制图表
-        myChart.setOption({
-            title: {
-                text: 'ECharts 入门示例',
-                top: 15,
-                left: 20,
-                textStyle: {
-                  color: '#fff'
-                }
-            },
-            tooltip: {},
-            xAxis: {
-                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-                axisLine: { lineStyle: { color: '#8392A5' } }
-            },
-            yAxis: {
-                axisLine: { lineStyle: { color: '#8392A5' } }
-            },
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
-        });
-    }
-    render() {
-        return (
-            <div id="main" style={{ width: 400, height: 400 }}></div>
-        );
-    }
+  componentDidMount() {
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    // 绘制图表
+    myChart.setOption({
+      title: {
+        text: 'ECharts 入门示例',
+        top: 15,
+        left: 20,
+        textStyle: {
+          color: '#fff',
+        },
+      },
+      tooltip: {},
+      xAxis: {
+        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
+        axisLine: { lineStyle: { color: '#8392A5' } },
+      },
+      yAxis: {
+        axisLine: { lineStyle: { color: '#8392A5' } },
+      },
+      series: [
+        {
+          name: '销量',
+          type: 'bar',
+          data: [5, 20, 36, 10, 10, 20],
+        },
+      ],
+    });
+  }
+  render() {
+    return <div id="main" style={{ width: 400, height: 400 }}></div>;
+  }
 }
 
 export default EchartsTest;
 ```
-demo1效果图：
-![柱状图](../images/react/柱状图.png)
+
+demo1 效果图： ![柱状图](../images/react/柱状图.png)
+
 <hr/>
 **demo2代码：**
 ```js
 import React, { Component } from 'react';
 
-// 引入 ECharts 主模块
-import echarts from 'echarts/lib/echarts';
-//导入折线图
-import 'echarts/lib/chart/line';  //折线图是line,饼图改为pie,柱形图改为bar
+// 引入 ECharts 主模块 import echarts from 'echarts/lib/echarts'; //导入折线图 import 'echarts/lib/chart/line'; //折线图是 line,饼图改为 pie,柱形图改为 bar
 
-// 引入提示框和标题组件
-import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/title';
+// 引入提示框和标题组件 import 'echarts/lib/component/tooltip'; import 'echarts/lib/component/title';
 
-// x轴拖动
-// import 'echarts/lib/component/dataZoom';
-// import 'echarts/lib/component/dataZoomSelect';
-import 'echarts/lib/component/dataZoomInside';
-import 'echarts/lib/component/dataZoomSlider';
+// x 轴拖动 // import 'echarts/lib/component/dataZoom'; // import 'echarts/lib/component/dataZoomSelect'; import 'echarts/lib/component/dataZoomInside'; import 'echarts/lib/component/dataZoomSlider';
 
-// 图例组件
-import 'echarts/lib/component/legend';
+// 图例组件 import 'echarts/lib/component/legend';
 
-// 图表标注
-import 'echarts/lib/component/markPoint';
+// 图表标注 import 'echarts/lib/component/markPoint';
 
-class EchartsTest extends Component {
-    componentDidMount() {
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-        var rawData = [
-          ['2016/1/1','3520','3588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/2','3620','3788','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/3','3720','3688','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/4','3820','3988','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/5','3420','4588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/6','3520','3588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/7','3220','3588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/8','3540','3788','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/9','3570','5088','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/10','3820','4688','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/11','3920','6588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/12','3520','3588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-          ['2016/1/13','4520','4588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'],
-        ];
+class EchartsTest extends Component { componentDidMount() { // 基于准备好的 dom，初始化 echarts 实例 var myChart = echarts.init(document.getElementById('main')); var rawData = [ ['2016/1/1','3520','3588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/2','3620','3788','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/3','3720','3688','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/4','3820','3988','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/5','3420','4588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/6','3520','3588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/7','3220','3588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/8','3540','3788','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/9','3570','5088','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/10','3820','4688','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/11','3920','6588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/12','3520','3588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ['2016/1/13','4520','4588','嗯嗯','10%','哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈','鱼鱼鱼','嗷嗷嗷','热热热','拜拜'], ];
 
         var dates = rawData.map(function (item) {
             return item[0];
@@ -295,10 +270,12 @@ class EchartsTest extends Component {
             <div id="main"></div>
         );
     }
+
 }
 
 export default EchartsTest;
-```
+
+````
 demo2效果图：
 ![k](../images/react/k.png)
 
@@ -339,7 +316,7 @@ dataZoom=[                                      //区域缩放
         top:"top",                                //组件离容器上侧的距离,'top', 'middle', 'bottom','20%'
         right:"auto",                             //组件离容器右侧的距离,'20%'
         bottom:"auto",                            //组件离容器下侧的距离,'20%'
- 
+
     },
     {
         id: 'dataZoomY',
@@ -361,15 +338,8 @@ dataZoom=[                                      //区域缩放
         moveOnMouseMove:true,                    //如何触发数据窗口平移。true：表示不按任何功能键，鼠标移动能触发数据窗口平移。false：表示鼠标滚轮不能触发缩放。'shift'：表示按住 shift 和鼠标移动能触发数据窗口平移。'ctrl'：表示按住 ctrl 和鼠标移动能触发数据窗口平移。'alt'：表示按住 alt 和鼠标移动能触发数据窗口平移。
     }
 ]
-```
+````
 
 <hr/>
 
-> 参考网址：
-> [W3Cscool如何快速上手ECharts](https://www.w3cschool.cn/echarts_tutorial/echarts_tutorial-mec528xa.html)：[https://www.w3cschool.cn/echarts_tutorial/echarts_tutorial-mec528xa.html](https://www.w3cschool.cn/echarts_tutorial/echarts_tutorial-mec528xa.html)
-> [ECharts官网](https://www.echartsjs.com/zh/option.html#title)：[https://www.echartsjs.com/zh/option.html#title](https://www.echartsjs.com/zh/option.html#title)
-> [动态加载数据](https://blog.csdn.net/hahahhahahahha123456/article/details/80390151)：[https://blog.csdn.net/hahahhahahahha123456/article/details/80390151](https://blog.csdn.net/hahahhahahahha123456/article/details/80390151)
-> [tradingview使用心得（用于画K线）](https://blog.csdn.net/hnlgzb/article/details/88064230)：[https://blog.csdn.net/hnlgzb/article/details/88064230](https://blog.csdn.net/hnlgzb/article/details/88064230)
-> [TradingView + WebSocket 实时推送 K 线脱坑指南](https://blog.csdn.net/weixin_33859504/article/details/87952669)：[https://blog.csdn.net/weixin_33859504/article/details/87952669](https://blog.csdn.net/weixin_33859504/article/details/87952669)
-> []()：[]()
-> []()：[]()
+> 参考网址： [W3Cscool 如何快速上手 ECharts](https://www.w3cschool.cn/echarts_tutorial/echarts_tutorial-mec528xa.html)：[https://www.w3cschool.cn/echarts_tutorial/echarts_tutorial-mec528xa.html](https://www.w3cschool.cn/echarts_tutorial/echarts_tutorial-mec528xa.html) > [ECharts 官网](https://www.echartsjs.com/zh/option.html#title)：[https://www.echartsjs.com/zh/option.html#title](https://www.echartsjs.com/zh/option.html#title) > [动态加载数据](https://blog.csdn.net/hahahhahahahha123456/article/details/80390151)：[https://blog.csdn.net/hahahhahahahha123456/article/details/80390151](https://blog.csdn.net/hahahhahahahha123456/article/details/80390151) > [tradingview 使用心得（用于画 K 线）](https://blog.csdn.net/hnlgzb/article/details/88064230)：[https://blog.csdn.net/hnlgzb/article/details/88064230](https://blog.csdn.net/hnlgzb/article/details/88064230) > [TradingView + WebSocket 实时推送 K 线脱坑指南](https://blog.csdn.net/weixin_33859504/article/details/87952669)：[https://blog.csdn.net/weixin_33859504/article/details/87952669](https://blog.csdn.net/weixin_33859504/article/details/87952669) > []()：[]() > []()：[]()

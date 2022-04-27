@@ -1,34 +1,37 @@
-# nuxt使用QRCode.js 生成二维码
+# nuxt 使用 QRCode.js 生成二维码
 
 QRCode.js 是一个用于生成二维码图片的插件， [官方文档](http://code.ciaoca.com/javascript/qrcode/) 。
 
-在nuxt.js（vue官方的服务端渲染方式）项目里使用的QRCode.js；
+在 nuxt.js（vue 官方的服务端渲染方式）项目里使用的 QRCode.js；
 
 **第一步**：看[官方文档](http://code.ciaoca.com/javascript/qrcode/)；
 
-**第二步**：下载QRCode.js：[http://code.ciaoca.com/javascript/qrcode/version/qrcodejs.zip](http://code.ciaoca.com/javascript/qrcode/version/qrcodejs.zip)，
+**第二步**：下载 QRCode.js：[http://code.ciaoca.com/javascript/qrcode/version/qrcodejs.zip](http://code.ciaoca.com/javascript/qrcode/version/qrcodejs.zip)，
 
-解压并将qrcode.min.js文件放到项目的static目录下（static目录下的文件不会被编译），
+解压并将 qrcode.min.js 文件放到项目的 static 目录下（static 目录下的文件不会被编译），
 
 比如你的服务器地址：https://www.aaa.com，最终打包到服务器上时，https://www.aaa.com/qrcode.min.js就是你刚才下载的qrcode.min.js
 
-**第三步**：在nuxt.config.js配置文件里配置head里的script对象：
+**第三步**：在 nuxt.config.js 配置文件里配置 head 里的 script 对象：
 
 ```
 head:{
-  script: 
+  script:
     [
       {
-        src: 'https://www.aaa.com/qrcode.min.js'  
+        src: 'https://www.aaa.com/qrcode.min.js'
       }
-    ]  
+    ]
 }
 ```
-**第四步**：在你需要显示二维码的位置加一个有id名的标签，比如：
+
+**第四步**：在你需要显示二维码的位置加一个有 id 名的标签，比如：
+
 ```
 <div id="qrcode"></div> /*id可自定义*/
 ```
-**第五步**：data里自己随意定义一个变量，用于配置二维码：
+
+**第五步**：data 里自己随意定义一个变量，用于配置二维码：
 
 ```
 export default {
@@ -39,9 +42,10 @@ export default {
   }
 }
 ```
-为什么要在data数据里添加这个变量呢，因为业务需求，这个二维码的内容可能会变化，要用到QRCode的API：makeCode，这个在第七步会讲到。
 
-**第六步**：在mounted里实例化QRCode（nuxt是服务端渲染，尽量少用created，created时，DOM还未生成）：
+为什么要在 data 数据里添加这个变量呢，因为业务需求，这个二维码的内容可能会变化，要用到 QRCode 的 API：makeCode，这个在第七步会讲到。
+
+**第六步**：在 mounted 里实例化 QRCode（nuxt 是服务端渲染，尽量少用 created，created 时，DOM 还未生成）：
 
 ```
 this.qrcodeObj = new QRCode('qrcode', {
@@ -54,7 +58,8 @@ this.qrcodeObj = new QRCode('qrcode', {
 });
 ```
 
-**第七步**：替换二维码内容，使用makeCode方法：
+**第七步**：替换二维码内容，使用 makeCode 方法：
+
 ```
 this.qrcodeObj.makeCode("你是一只小可爱");
 ```

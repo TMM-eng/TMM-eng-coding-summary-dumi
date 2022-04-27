@@ -1,59 +1,57 @@
-# 微信小程序 通过云函数请求http网站接口
+# 微信小程序通过云函数请求 http 网站接口
 
 > 微信小程序正式版无法调用 `http` 类型的 `API` 接口，只有 `htttps` 类型才可以通过验证，可以利用云函数避免这一难点。
 
-1. 新建 `cloudfunctions` 文件夹，`project.config.json` 配置根目录
+1.  新建 `cloudfunctions` 文件夹，`project.config.json` 配置根目录
 
     ![project.config.json](./images/project.config配置.png)
 
-2. 在 `cloudfunctions` 文件夹右击，新建 `HttpApi` 云函数
+2.  在 `cloudfunctions` 文件夹右击，新建 `HttpApi` 云函数
 
     ![新建云函数](./images/新建云函数.png)
 
-3. 使用云函数前，`HttpApi` 文件夹 右击 在内建终端中打开，安装这个命令：`npm install request-promise`，
-安装完成后文件夹内多了 `node_modules` 文件夹、`package-lock.json` 文件
-    ![下载promise依赖](./images/下载promise依赖.png)
+3.  使用云函数前，`HttpApi` 文件夹 右击 在内建终端中打开，安装这个命令：`npm install request-promise`，安装完成后文件夹内多了 `node_modules` 文件夹、`package-lock.json` 文件 ![下载promise依赖](./images/下载promise依赖.png)
 
-    **特别注意：如果在本机其他窗口打开终端，可能会出现如下 `-404011` 错误(SDK 云函数错误：云函数调用失败：函数执行失败)**
-    参考：[错误码](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference/errcode.html)
+        **特别注意：如果在本机其他窗口打开终端，可能会出现如下 `-404011` 错误(SDK 云函数错误：云函数调用失败：函数执行失败)**
+        参考：[错误码](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference/errcode.html)
 
-    ![404011](./images/404011.png)
+        ![404011](./images/404011.png)
 
-4. 编辑 云函数入口文件 `cloudfunctions\HttpApi\index.js`
+4.  编辑 云函数入口文件 `cloudfunctions\HttpApi\index.js`
 
 ```js
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
+const cloud = require('wx-server-sdk');
 var rp = require('request-promise');
-cloud.init()
+cloud.init();
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
+  const wxContext = cloud.getWXContext();
   // 天气预报公共开放接口 http://wthrcdn.etouch.cn/weather_mini?city=北京
-  let url = "http://wthrcdn.etouch.cn/weather_mini";
+  let url = 'http://wthrcdn.etouch.cn/weather_mini';
   return await rp(url)
     .then(function (res) {
-      return res
+      return res;
     })
     .catch(function (err) {
-      return '失败'
+      return '失败';
     });
-}
+};
 ```
 
 5. 上传并部署云函数(如果不行，可试点击 **上传并部署：所有文件**)
 
-    ![上传并部署云函数](./images/上传并部署云函数.png)
+   ![上传并部署云函数](./images/上传并部署云函数.png)
 
-6. `miniprogram\app.js` 文件中初始化云函数并设置环境(`env` : 云开发 -> 设置 -> 环境ID)
+6. `miniprogram\app.js` 文件中初始化云函数并设置环境(`env` : 云开发 -> 设置 -> 环境 ID)
 
 ```js
 // app.js
 App({
   onLaunch: function () {
     if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力');
     } else {
       wx.cloud.init({
         // env 参数说明：
@@ -63,11 +61,11 @@ App({
         //   env: 'my-env-id',
         env: 'tmm-0gx0rwuf0b2286eb',
         traceUser: true,
-      })
+      });
     }
-    this.globalData = {}
-  }
-})
+    this.globalData = {};
+  },
+});
 ```
 
 7. 前端页面调用云函数 `miniprogram\pages\index\index.js`
@@ -147,41 +145,43 @@ getCloudData: function (e) {
   display: flex;
   justify-content: space-between;
 }
-#search .text, #search .btn {
+#search .text,
+#search .btn {
   display: inline-block;
   height: 36px;
-  line-height: 36px;
   padding: 0 10px;
+  line-height: 36px;
   border: 1px solid #2165ed;
   border-radius: 20px;
 }
 #search .text {
   width: 100%;
-  overflow: hidden;
   padding: 0 15px;
+  overflow: hidden;
 }
 #search .btn {
   width: 80px;
-  color: #fff;
-  background-color: #2165ed;
   margin-left: 10px;
+  color: #fff;
   text-align: center;
+  background-color: #2165ed;
 }
 .list {
   display: block;
 }
 .list h5 {
-  font-size: 20px;
   margin-top: 10px;
+  font-size: 20px;
 }
 .list ul {
   display: block;
   padding: 0 10px;
 }
-.list li, .info view {
-  width: 100%;
+.list li,
+.info view {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   margin: 16px 0;
 }
 .info view {
@@ -192,7 +192,8 @@ getCloudData: function (e) {
   width: 45px;
   height: 45px;
 }
-.list li image, .wendu {
+.list li image,
+.wendu {
   flex-shrink: 0;
 }
 .list li .content {
@@ -203,12 +204,14 @@ getCloudData: function (e) {
   color: #666;
   font-size: 18px;
 }
-.list li .content .b, .tips {
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.38);
+.list li .content .b,
+.tips {
   margin-top: 5px;
+  color: rgba(0, 0, 0, 0.38);
+  font-size: 14px;
 }
-#now1, #now1 .t {
+#now1,
+#now1 .t {
   color: #2165ed;
 }
 .color5ed {
@@ -216,38 +219,38 @@ getCloudData: function (e) {
 }
 ```
 
-## 解决返回值乱码问题(参考：[在云函数里做http请求，返回的中文是乱码](https://developers.weixin.qq.com/community/develop/doc/000e8c989704b84bed89048535bc00?jumpto=comment&commentid=000060c43ac860dce289ba1b0568))
+## 解决返回值乱码问题(参考：[在云函数里做 http 请求，返回的中文是乱码](https://developers.weixin.qq.com/community/develop/doc/000e8c989704b84bed89048535bc00?jumpto=comment&commentid=000060c43ac860dce289ba1b0568))
 
 1. 编辑 云函数入口文件 `cloudfunctions\HttpApi\index.js`
 
 ```js
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
+const cloud = require('wx-server-sdk');
 var rp = require('request-promise');
 
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { window } = new JSDOM();
-const { document } = (new JSDOM('')).window;
+const { document } = new JSDOM('').window;
 global.document = document;
 const jQuery = require('jquery')(window);
 
-cloud.init()
+cloud.init();
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
+  const wxContext = cloud.getWXContext();
 
-  let url = "http://wthrcdn.etouch.cn/weather_mini?city=" + (event.city || '');
+  let url = 'http://wthrcdn.etouch.cn/weather_mini?city=' + (event.city || '');
   return new Promise((rs, rj) => {
     try {
       jQuery.get(url, (res) => {
-        rs(res)
-      })
+        rs(res);
+      });
     } catch (e) {
       rj(e.message);
     }
-  })
+  });
   // return await rp(url)
   //   .then(function (res) {
   //     return res
@@ -255,7 +258,7 @@ exports.main = async (event, context) => {
   //   .catch(function (err) {
   //     return '失败'
   //   });
-}
+};
 ```
 
 2. 前端页面调用云函数 `miniprogram\pages\index\index.js`

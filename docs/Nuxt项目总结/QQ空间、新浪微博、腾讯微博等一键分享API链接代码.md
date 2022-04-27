@@ -1,4 +1,7 @@
+# QQ 空间、新浪微博、腾讯微博等一键分享 API 链接代码
+
 1. 新浪微博：
+
 ```
 http://service.weibo.com/share/share.php?url=
 
@@ -10,7 +13,9 @@ http://service.weibo.com/share/share.php?url=
   &ralateUid=转发时会@相关的微博账号(可选，允许为空)  例如本人微博的uid为5322994217
   &language=语言设置(zh_cn|zh_tw)(可选)
 ```
+
 2. 腾讯微博：
+
 ```
 http://share.v.t.qq.com/index.php?c=share&a=index
 
@@ -22,11 +27,11 @@ http://share.v.t.qq.com/index.php?c=share&a=index
 &line2=消息体第二行的文字，最多15个全角字符的长度
 &line3=消息体第三行的文字，最多15个全角字符的长度
 ```
-API文档：[http://dev.t.qq.com/websites/useshare?explain=1](http://dev.t.qq.com/websites/useshare?explain=1)
 
- 
+API 文档：[http://dev.t.qq.com/websites/useshare?explain=1](http://dev.t.qq.com/websites/useshare?explain=1)
 
 3. 人人网：
+
 ```
 http://widget.renren.com/dialog/share?
 
@@ -36,9 +41,11 @@ resourceUrl=分享的资源Url
 & title=分享的标题
 &description=分享的详细描述
 ```
-API文档：[http://dev.renren.com/website/?widget=rrshare&content=use](http://dev.renren.com/website/?widget=rrshare&content=use)
 
-4. QQ空间：
+API 文档：[http://dev.renren.com/website/?widget=rrshare&content=use](http://dev.renren.com/website/?widget=rrshare&content=use)
+
+4. QQ 空间：
+
 ```
 http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?
 
@@ -49,9 +56,11 @@ url=分享的网址
 &site=分享来源 如：腾讯网(可选)
 &pics=分享图片的路径(可选)
 ```
-API文档：[http://connect.qq.com/intro/share/](http://connect.qq.com/intro/share/)
+
+API 文档：[http://connect.qq.com/intro/share/](http://connect.qq.com/intro/share/)
 
 比如：
+
 ```
 <a href="javascript:void(0);" οnclick="window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+encodeURIComponent(document.location.href));return false;" title="分享到QQ空间">
     <img src="http://qzonestyle.gtimg.cn/ac/qzone_v5/app/app_share/qz_logo.png" alt="分享到QQ空间" />
@@ -59,6 +68,7 @@ API文档：[http://connect.qq.com/intro/share/](http://connect.qq.com/intro/sha
 ```
 
 5. 分享到豆瓣：
+
 ```
 http://shuo.douban.com/!service/share?
 
@@ -67,9 +77,11 @@ image=分享图片
 &name=分享标题
 &text=分享内容
 ```
-API文档：[http://open.weixin.qq.com/document/api/timeline/?lang=zh_CN](http://open.weixin.qq.com/document/api/timeline/?lang=zh_CN)
 
-6. 分享到QQ群、QQ好友
+API 文档：[http://open.weixin.qq.com/document/api/timeline/?lang=zh_CN](http://open.weixin.qq.com/document/api/timeline/?lang=zh_CN)
+
+6. 分享到 QQ 群、QQ 好友
+
 ```
 <a class="lqq" target="_blank" href="javascript:void(0);" οnclick="window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(document.location.href) + '
 

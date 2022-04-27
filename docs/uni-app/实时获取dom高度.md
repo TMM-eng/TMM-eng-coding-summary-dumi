@@ -1,4 +1,4 @@
-### 实时获取dom高度
+# 实时获取 dom 高度
 
 > 通过 `nodesRef.boundingClientRect(callback)` 获取
 
@@ -6,7 +6,9 @@
     <!-- dom -->
     <view id="allRights"></view>
 ```
-> 该函数要在dom渲染之后获取
+
+> 该函数要在 dom 渲染之后获取
+
 ```js
     onReady() {
         setTimeout(() => {
